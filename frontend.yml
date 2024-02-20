@@ -1,5 +1,6 @@
 - name: Expense frontend setup
   hosts: all
+  become: yes
   tasks:
     - name: install nginx service
       ansible.builtin.dnf:
