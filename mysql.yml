@@ -1,4 +1,4 @@
-- name: mysql
+- name: Expense Mysql setup
   hosts: all
   become: yes
   tasks:
@@ -10,7 +10,7 @@
         dest: /etc/yum.repos.d/mysql.repo
     - name: install mysql
       ansible.builtin.dnf:
-        name: mysql
+        name: mysql-community-server -y
         state: present
     - name: start mysql
       ansible.builtin.systemd:
