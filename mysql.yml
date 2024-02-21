@@ -1,0 +1,21 @@
+- name: mysql
+  hosts: all
+  become: yes
+  tasks:
+    - name: disable mysql
+      ansible.builtin.shell: module disable mysql -y
+    - name: copy files
+      ansible.buitin.copy:
+        src: mysql.repo
+        dest: /etc/yum.repos.d/mysql.repo
+    - name: install mysql
+      ansible.bitin.dnf:
+        name: mysql
+        state: present
+    - name: start mysql
+      ansible.buitin.systemd:
+        name: mysql
+        state: restarted
+        enabled: yes
+    - name: setting root password
+      ansible.builtin.shell: mysql_secure_installation --set-root-pass {{MYSQL_ROOT_PASSWORD}}
