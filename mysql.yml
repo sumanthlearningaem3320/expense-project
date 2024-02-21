@@ -5,15 +5,15 @@
     - name: disable mysql
       ansible.builtin.shell: module disable mysql -y
     - name: copy files
-      ansible.buitin.copy:
+      ansible.builtin.copy:
         src: mysql.repo
         dest: /etc/yum.repos.d/mysql.repo
     - name: install mysql
-      ansible.bitin.dnf:
+      ansible.builtin.dnf:
         name: mysql
         state: present
     - name: start mysql
-      ansible.buitin.systemd:
+      ansible.builtin.systemd:
         name: mysql
         state: restarted
         enabled: yes
