@@ -13,7 +13,7 @@
 - name: creating nginx content
   ansible.builtin.file:
     path: /usr/share/nginx/html
-    state: present
+    state: directory
 - name: download yhe content
   ansible.builtin.unarchive:
     src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
