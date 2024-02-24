@@ -10,7 +10,7 @@
   ansible.builtin.file:
     path: /usr/share/nginx/html
     state: absent
-- name: remove old content
+- name: creating nginx content
   ansible.builtin.file:
     path: /usr/share/nginx/html
     state: present
