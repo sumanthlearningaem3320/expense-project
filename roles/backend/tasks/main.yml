@@ -38,7 +38,7 @@
   ansible.builtin.shell: mysql -h mysql-dev.sumanthguntur320.online -uroot -p{{mysql_root_password}} < /app/schema/backend.sql
 - name: restart mysql
   ansible.builtin.systemd:
-    name: mysql
+    name: backend
     state: restarted
     enabled: yes
     daemon-reload: yes
