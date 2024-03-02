@@ -13,19 +13,13 @@
 - name: add application user
   ansible.builtin.user:
     name: expense
-- name: delete old app content
-  ansible.builtin.file:
-    path: /app
-    state: absent
-- name: create app directory
-  ansible.builtin.file:
-    path: /app
-    state: directory
-- name: downlad the content
-  ansible.builtin.unarchive:
-    src: https://expense-artifacts.s3.amazonaws.com/backend.zip
-    dest: /app
-    remote_src: yes
+- name: import common role
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: prereq
+  vars:
+    app_dir: /app
+    component: backend
 - name: download nodejs dependencies
   ansible.builtin.shell: npm install
   args:
@@ -35,7 +29,7 @@
     name: mysql
     state: present
 - name: load schema
-  ansible.builtin.shell: mysql -h mysql-dev.sumanthguntur320.online -uroot -p{{mysql_root_password}} < /app/schema/backend.sql
+  ansible.builtin.shell: mysql -h {{ lookup('amazon.aws.aws_ssm', 'backend.{{env}}.DB_HOST', region='us-east-1' ) }} -u{{ lookup('amazon.aws.aws_ssm', 'backend.{{env}}.DB_USER', region='us-east-1' ) }} -p{{ lookup('amazon.aws.aws_ssm', 'backend.{{env}}.DB_PASS', region='us-east-1' ) }} < /app/schema/backend.sql
 - name: restart mysql
   ansible.builtin.systemd:
     name: backend
