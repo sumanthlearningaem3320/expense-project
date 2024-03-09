@@ -2,3 +2,7 @@
   ansible.builtin.template:
     src: elastic.repo
     dest: /etc/yum.repos.d/elastic.repo
+- name: installing filebeat
+  ansible.builtin.dnf:
+    name: file beat
+    state: installed
