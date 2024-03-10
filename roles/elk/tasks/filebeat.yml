@@ -9,7 +9,7 @@
     state: installed
 
 - name: copy filebeat configuration
-  ansible.builtin.template:
+  ansible.builtin.elk:
     src: fiebeat.yml
     dest: /etc/filebeat/fiebeat.yml
 
