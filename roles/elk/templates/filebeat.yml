@@ -157,6 +157,7 @@ setup.kibana:
    The Logstash hosts
   hosts: ["172.31.38.215:5044"]
 
+
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
   #ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
