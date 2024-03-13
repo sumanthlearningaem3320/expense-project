@@ -6,7 +6,7 @@
 
 - name: copy module
   ansible.builtin.copy:
-    src: node-exportet.service
+    src: node-exporter.service
     dest: /etc/systemd/system/node-exporter.service
 
 - name: restart node exporter
