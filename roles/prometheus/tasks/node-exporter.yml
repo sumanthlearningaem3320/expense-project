@@ -5,7 +5,7 @@
     remote_src: yes
 
 - name: copy module
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: node-exporter.service
     dest: /etc/systemd/system/node-exporter.service
 
