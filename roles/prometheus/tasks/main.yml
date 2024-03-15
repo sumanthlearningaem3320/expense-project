@@ -3,6 +3,8 @@
     src: prometheus
     dest: /opt/prometheus/prometheus.yml
 
+
+
 - name: restart prometheus
   ansible.builtin.systemd:
     name: prometheus
