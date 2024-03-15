@@ -11,3 +11,21 @@
     state: restarted
     enabled: yes
 
+
+- name: copy grafana module
+  ansible.builtin.template:
+    src: grafana.service
+    dest: /etc/yum.repos.d/grafana.repo
+
+- name: install grafana
+  ansible.builtin.systemd:
+    name: grafana
+    state: present
+
+- name: restart grafana
+  ansible.builtin.systemd:
+    name: grafana
+    state: restarted
+    enabled: yes
+
+
