@@ -34,6 +34,13 @@ scrape_configs:
         filters:
           - name: "tag:monitor"
             values: ["true"]
+    relabel_configs:
+        - source_labels: [ __meta_ec2_availability_zone ]
+          target_label: "instance_zone"
+        - source_labels: [ __meta_ec2_tag ]
+          target_label: "instance_name"
+        - source_labels: [ __meta_ec2_instance_type ]
+          target_label: "instance_id"
 
 
 
