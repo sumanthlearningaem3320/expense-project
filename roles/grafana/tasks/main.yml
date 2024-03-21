@@ -1,0 +1,14 @@
+- name: create dashboard file
+  ansible.builtin.template:
+    src: dashboard.json
+    dest: /tmp/dashboard.json
+
+
+- name: Import Grafana dashboard foo
+  community.grafana.grafana_dashboard:
+    grafana_url: http://172.31.0.34:3000
+    grafana_api_key: "{{ lookup('amazon.aws.aws_ssm', 'grafana.api_key', region='us-east-1' ) }}"
+    state: present
+    commit_message: Updated by ansible
+    overwrite: true
+    path: /tmp/dashboard.json
