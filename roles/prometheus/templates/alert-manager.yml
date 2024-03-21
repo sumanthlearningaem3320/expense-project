@@ -2,7 +2,7 @@ groups:
   - name: nodeaaa-exporter-frontend
     rules:
       - alert: InstanceDown
-        expr: up < 0
+        expr: up < 1
         for: 1m
         labels:
           severity: critical
