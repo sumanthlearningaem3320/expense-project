@@ -3,6 +3,11 @@
     src: prometheus.yml
     dest: /opt/prometheus/prometheus.yml
 
+- name: copy module alertmanger
+  ansible.builtin.template:
+    src: alert-manager.yml
+    dest: /opt/prometheus/alert-manager.yml
+
 
 
 - name: restart node exporter
