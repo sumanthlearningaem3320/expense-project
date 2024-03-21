@@ -191,7 +191,7 @@
           "expr": "(node_memory_MemFree_bytes{instance_name=\"frontend-dev\"} + node_memory_Cached_bytes{instance_name=\"frontend-dev\"}+ node_memory_Buffers_bytes{instance_name=\"frontend-dev\"}) / node_memory_MemTotal_bytes{instance_name=\"frontend-dev\"} * 100",
           "instant": false,
         {% raw %}
-        "legendFormat":, "{{instance_name}}",
+          "legendFormat": "{{instance_name}}",
         {% endraw %}
           "range": true,
           "refId": "A"
