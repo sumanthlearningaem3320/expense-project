@@ -5,9 +5,11 @@ route:
   repeat_interval: 1h
   receiver: 'web.hook'
 receivers:
-  - name: 'web.hook'
-    webhook_configs:
-      - url: 'http://127.0.0.1:5001/'
+  - name: sns
+    sns_configs:
+      - topic_arn: arn:aws:sns:us-east-1:684832353742:alerts
+        sigv4:
+        region: us-east-1
 inhibit_rules:
   - source_match:
       severity: 'critical'
