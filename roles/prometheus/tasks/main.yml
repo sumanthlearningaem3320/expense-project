@@ -16,6 +16,16 @@
     state: restarted
     enabled: yes
 
+- name: copy  alertmangernode
+  ansible.builtin.template:
+    src: alertmanager.yml
+    dest: /opt/alertmanager/alertmanager.yml
+
+- name: restart alertmanager
+  ansible.builtin.systemd:
+    name: alertmanager
+    state: restarted
+    enabled: yes
 
 
 
