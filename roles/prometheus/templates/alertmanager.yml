@@ -3,17 +3,14 @@ route:
   group_wait: 30s
   group_interval: 5m
   repeat_interval: 1h
-  receiver: 'SNS'
+  receiver: 'web.hook'
 receivers:
-  - name: SNS
-    sns_configs:
-      - topic_arn: arn:aws:sns:us-east-1:684832353742:alerts
-        sigv4:
-        region: us-east-1
+  - name: 'web.hook'
+    webhook_configs:
+      - url: 'http://127.0.0.1:5001/'
 inhibit_rules:
   - source_match:
       severity: 'critical'
     target_match:
       severity: 'warning'
     equal: ['alertname', 'dev', 'instance']
-
