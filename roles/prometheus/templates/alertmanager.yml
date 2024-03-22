@@ -3,9 +3,9 @@ route:
   group_wait: 30s
   group_interval: 5m
   repeat_interval: 1h
-  receiver: 'web.hook'
+  receiver: 'SNS'
 receivers:
-  - name: sns
+  - name: SNS
     sns_configs:
       - topic_arn: arn:aws:sns:us-east-1:684832353742:alerts
         sigv4:
