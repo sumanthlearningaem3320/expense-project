@@ -1,5 +1,5 @@
 groups:
-  - name: nodeaaa-exporter-frontend
+  - name: node-exporter-frontend
     rules:
       - alert: InstanceDown
         expr: up < 1
