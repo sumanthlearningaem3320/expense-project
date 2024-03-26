@@ -44,7 +44,7 @@
 
 
 - name: uploading front end file top s3 bucket
-  amazon.aws.s3_sync:
+  community.aws.s3_sync:
     bucket: r76-prometheus-alert-rules
     file_root: /tmp/{{component}}-{{env}}.yml
 
