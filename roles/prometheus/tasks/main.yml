@@ -5,16 +5,22 @@
 
 - name: copy module alertmanger
   ansible.builtin.template:
-    src: alert-manager.yml
-    dest: /opt/prometheus/alert-manager.yml
+    src: common.yml
+    dest: /opt/prometheus/alert-rules/common.yml
+
+
+- name: download all the objects with name starting with alert
+  amazon.aws.s3_object:
+    bucket: r76-prometheus-alert-rules
+    mode: get
+    object: "*"
+    dest: /tmp/
 
 
 
-- name: restart node exporter
-  ansible.builtin.systemd:
-    name: prometheus
-    state: restarted
-    enabled: yes
+- name: reload node exporter
+  ansible.builtin.shell: kill -1 $(ps-ef | grep /opt/prometheus/prometheus | grep -v grep | awk '{print $2}')
+
 
 - name: copy  alertmangernode
   ansible.builtin.template:
@@ -22,10 +28,15 @@
     dest: /opt/alertmanager/alertmanager.yml
 
 - name  : restart alertmanager
-  ansible.builtin.systemd:
-    name: alertmanager
-    state: restarted
-    enabled: yes
+  ansible.builtin.shell: kill -1 $(ps-ef | grep /opt/alertmanager/alertmanager | grep -v grep | awk '{print $2}')
 
+
+- name: Copy all the objects with name starting with 'ansible_'
+  amazon.aws.s3_object:
+    bucket: r76-prometheus-alert-rules
+    mode: copy
+    copy_src:
+      bucket: srcbucket
+      prefix: 'ansible_'
 
 
