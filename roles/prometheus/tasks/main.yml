@@ -5,8 +5,8 @@
 
 - name: copy module alertmanger
   ansible.builtin.template:
-    src: common.yml
-    dest: /opt/prometheus/alert-rules/common.yml
+    src: alert-rules.yml
+    dest: /opt/prometheus/alert-rules.yml
 
 - name: reload prometheus
   ansible.builtin.systemd:
