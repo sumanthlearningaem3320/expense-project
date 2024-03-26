@@ -13,7 +13,7 @@ alerting:
 
 # Load rules once and periodically evaluate them according to the global 'evalua                                                                                                             tion_interval'.
 rule_files:
-  - "alert-rules.yml"
+  - "alert-rules/"
 
 
 # A scrape configuration containing exactly one endpoint to scrape:
