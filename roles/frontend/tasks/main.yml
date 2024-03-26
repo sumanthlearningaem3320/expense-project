@@ -37,6 +37,14 @@
   ansible.builtin.import_role:
     name: grafana
 
+- name: genearate alert yml file
+  ansible.builtin.template:
+    src: alert-rules.yml
+    dest: /tmp/alert-rules.yml
+
+
+
+
 
 
 
