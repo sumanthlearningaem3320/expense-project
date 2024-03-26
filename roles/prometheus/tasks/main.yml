@@ -9,10 +9,8 @@
     dest: /opt/prometheus/alert-rules.yml
 
 - name: reload prometheus
-  ansible.builtin.systemd:
-    name: prometheus
-    state: restarted
-    enabled: yes
+  ansible.builtin.shell: kill -1 $(ps -ef |grep /opt/prometheus/prometheus | grep -v grep | awk '{print $2}')
+
 
 
 - name: copy  alertmangernode
@@ -41,10 +39,8 @@
 
 
 - name  : reload   alertmanager
-  ansible.builtin.systemd:
-    name: alertmanager
-    state: restarted
-    enabled: yes
+  ansible.builtin.shell: kill -1 $(ps -ef |grep /opt/alertmanager/alertmanager | grep -v grep | awk '{print $2}')
+
 
 
 
