@@ -39,7 +39,7 @@
 
 - name: genearate alert yml file
   ansible.builtin.template:
-    src: common.yml
+    src: alert-rules.yml
     dest: /tmp/{{component}}-{{env}}.yml
 
 
