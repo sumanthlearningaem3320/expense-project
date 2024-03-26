@@ -26,8 +26,8 @@
   loop: "{{out.s3_keys}}"
 
 
-- name: reload node exporter
-  ansible.builtin.shell: kill -1 $(ps-ef | grep /opt/prometheus/prometheus | grep -v grep | awk '{print $2}')
+- name: reload prometheus
+  ansible.builtin.shell: kill -1 $( ps -ef | grep /opt/prometheus/prometheus | grep -v grep | awk '{print$2}')
 
 
 - name: copy  alertmangernode
