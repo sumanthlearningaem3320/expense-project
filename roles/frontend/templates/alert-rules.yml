@@ -1,8 +1,8 @@
 groups:
   - name: {{ component }}-{{ dev }}
     rules:
-    - alert: CPU Usage alert
-      expr: avg by (instance) ((1 - rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 70
+    - alert: CPUUsagealert
+      expr: avg by (instance) (100 - (rate(node_cpu_seconds_total{mode="idle"}[5m]) * 100)) > 70
       for: 1m
       labels:
         severity: warning
