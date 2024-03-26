@@ -1,45 +1,13 @@
-#- name: copy module
-#  ansible.builtin.template:
-#    src: prometheus.yml
-#    dest: /opt/prometheus/prometheus.yml
-#
-#- name: copy module alertmanger
-#  ansible.builtin.template:
-#    src: common.yml
-#    dest: /opt/prometheus/alert-rules/common.yml
-#
-#
-#- name: download all the objects with name starting with alert
-#  amazon.aws.s3_object:
-#    bucket: r76-prometheus-alert-rules
-#    mode: get
-#    object: "*"
-#    dest: /tmp/
-#
-#
-#
-#- name: reload node exporter
-#  ansible.builtin.shell: kill -1 $(ps-ef | grep /opt/prometheus/prometheus | grep -v grep | awk '{print $2}')
-#
-#
-#- name: copy  alertmangernode
-#  ansible.builtin.template:
-#    src: alertmanager.yml
-#    dest: /opt/alertmanager/alertmanager.yml
-#
-#- name  : restart alertmanager
-#  ansible.builtin.shell: kill -1 $(ps-ef | grep /opt/alertmanager/alertmanager | grep -v grep | awk '{print $2}')
-#
-#
-#- name: Copy all the objects with name starting with 'ansible_'
-#  amazon.aws.s3_object:
-#    bucket: r76-prometheus-alert-rules
-#    mode: copy
-#    copy_src:
-#      bucket: srcbucket
-#      prefix: 'ansible_'
-#
-#
+- name: copy module
+  ansible.builtin.template:
+    src: prometheus.yml
+    dest: /opt/prometheus/prometheus.yml
+
+- name: copy module alertmanger
+  ansible.builtin.template:
+    src: common.yml
+    dest: /opt/prometheus/alert-rules/common.yml
+
 
 - name: list all objects
   amazon.aws.s3_object:
@@ -47,6 +15,30 @@
     mode: list
   register: out
 
-- name: print bucket name
-  debug:
-    msg: "{{out}}"
+
+
+- name: download all the object names freom s3 bucket having alert files
+  amazon.aws.s3_object:
+    bucket: r76-prometheus-alert-rules
+    mode: get
+    object: "{{item}}"
+    dest: /opt/prometheus/alert-rules/
+  loop: "{{out."s3_keys"}}"
+
+
+- name: reload node exporter
+  ansible.builtin.shell: kill -1 $(ps-ef | grep /opt/prometheus/prometheus | grep -v grep | awk '{print $2}')
+
+
+- name: copy  alertmangernode
+  ansible.builtin.template:
+    src: alertmanager.yml
+    dest: /opt/alertmanager/alertmanager.yml
+
+- name  : restart alertmanager
+  ansible.builtin.shell: kill -1 $(ps-ef | grep /opt/alertmanager/alertmanager | grep -v grep | awk '{print $2}')
+
+
+
+
+
