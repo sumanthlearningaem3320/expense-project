@@ -1,5 +1,5 @@
 groups:
-  - name: {{ component }}-{{ dev }}
+  - name: {{ component }}-{{ env }}
     rules:
     - alert: CPUUsagealert
       expr: avg by (instance) (100 - (rate(node_cpu_seconds_total{mode="idle"}[5m]) * 100)) > 70
