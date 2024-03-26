@@ -44,11 +44,9 @@
 
 
 - name: uploading front end file top s3 bucket
-  amazon.aws.s3_object:
+  amazon.aws.s3_sync:
     bucket: r76-prometheus-alert-rules
-    object: "{{component}}-{{env}}.yml"
-    src: /tmp/{{component}}-{{env}}.yml
-    mode: put
+    file_root: /tmp/{{component}}-{{env}}.yml
 
 
 
