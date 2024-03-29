@@ -56,6 +56,8 @@
 #    file_root: /tmp/alert-rules.yml
 #
 
+- name: trigger prometheus
+  ansible.builtin.shell: curl -u "{{ lookup('amazon.aws.aws_ssm', 'jenkins_prometheus_user', region='us-east-1' ) }}":"{{ lookup('amazon.aws.aws_ssm', 'jenkins_prometheus_pass', region='us-east-1' ) }}"  "172.31.12.9:8080/job/prometheus/build?token=prometheus"
 
 
 
