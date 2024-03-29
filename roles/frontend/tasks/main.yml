@@ -37,23 +37,12 @@
   ansible.builtin.import_role:
     name: grafana
 
-- name: genearate alert yml file
-  ansible.builtin.template:
-    src: alert-rules.yml
-    dest: /tmp/{{component}}-{{env}}.yml
+- name: import prometheus role -alert-rules update
+  ansible.builtin.import_role:
+    name: prometheus
+    tasks_from: alert-rules-update.yml
 
 
-- name: uploading front end file top s3 bucket
-  ansible.builtin.shell: aws s3 cp /tmp/{{component}}-{{env}}.yml s3://r76-prometheus-alert-rules/{{component}}-{{env}}.yml
-
-#- name: uploading front end file top s3 bucket
-#  community.aws.s3_sync:
-#    bucket: r76-prometheus-alert-rules
-#    file_root: /tmp/alert-rules.yml
-#
-
-- name: trigger prometheus
-  ansible.builtin.shell: curl -u "{{ lookup('amazon.aws.aws_ssm', 'jenkins_prometheus_user', region='us-east-1' ) }}":"{{ lookup('amazon.aws.aws_ssm', 'jenkins_prometheus_pass', region='us-east-1' ) }}"  "172.31.12.9:8080/job/prometheus/build?token=prometheus"
 
 
 
