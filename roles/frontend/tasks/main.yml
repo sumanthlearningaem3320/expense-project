@@ -1,27 +1,27 @@
-#- name: install nginx
-#  ansible.builtin.dnf:
-#    name: nginx
-#    state: present
-#
-#- name: copy module
-#  ansible.builtin.copy:
-#    src: expense.conf
-#    dest: /etc/nginx/default.d/expense.conf
-#
-#- name: import common role
-#  ansible.builtin.import_role:
-#    name: common
-#    tasks_from: prereq
-#  vars:
-#    app_dir: /usr/share/nginx/html
-#    component: frontend
-#
-#- name: restart nginx
-#  ansible.builtin.systemd:
-#    name: nginx
-#    state: restarted
-#    enabled: yes
-#
+- name: install nginx
+  ansible.builtin.dnf:
+    name: nginx
+    state: present
+
+- name: copy module
+  ansible.builtin.copy:
+    src: expense.conf
+    dest: /etc/nginx/default.d/expense.conf
+
+- name: import common role
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: prereq
+  vars:
+    app_dir: /usr/share/nginx/html
+    component: frontend
+
+- name: restart nginx
+  ansible.builtin.systemd:
+    name: nginx
+    state: restarted
+    enabled: yes
+
 #- name: import elk role -filebeat
 #  ansible.builtin.import_role:
 #    name: elk
