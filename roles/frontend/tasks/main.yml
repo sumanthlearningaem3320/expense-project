@@ -44,6 +44,6 @@
 ###
 
 - name : Install new relic agent
-  ansible.builtin.shell: curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && sudo NEW_RELIC_API_KEY={{ lookup('amazon.aws.aws_ssm', 'key-newrelic', region='us-east-1' ) }} NEW_RELIC_ACCOUNT_ID={{ lookup('amazon.aws.aws_ssm', 'key-newrelicid', region='us-east-1' ) }} /usr/local/bin/newrelic install -y -n infrastructure-agent-installer
+  ansible.builtin.shell: curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && sudo NEW_RELIC_API_KEY=NRAK-HJTD7HUKABHWOP6IYWA3TGCQPDW NEW_RELIC_ACCOUNT_ID=4408033 /usr/local/bin/newrelic install -y -n infrastructure-agent-installer
 
 
