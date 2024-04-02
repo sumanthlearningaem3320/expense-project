@@ -1,63 +1,49 @@
-- name: install nginx
-  ansible.builtin.dnf:
-    name: nginx
-    state: present
+#- name: install nginx
+#  ansible.builtin.dnf:
+#    name: nginx
+#    state: present
+#
+#- name: copy module
+#  ansible.builtin.copy:
+#    src: expense.conf
+#    dest: /etc/nginx/default.d/expense.conf
+#
+#- name: import common role
+#  ansible.builtin.import_role:
+#    name: common
+#    tasks_from: prereq
+#  vars:
+#    app_dir: /usr/share/nginx/html
+#    component: frontend
+#
+#- name: restart nginx
+#  ansible.builtin.systemd:
+#    name: nginx
+#    state: restarted
+#    enabled: yes
+#
+#- name: import elk role -filebeat
+#  ansible.builtin.import_role:
+#    name: elk
+#    tasks_from: filebeat
+#
+#- name: import node export
+#  ansible.builtin.import_role:
+#    name: prometheus
+#    tasks_from: node-exporter
+#
+#
+#- name: import grafana dashboard
+#  ansible.builtin.import_role:
+#    name: grafana
+#
+#- name: import prometheus role -alert-rules update
+#  ansible.builtin.import_role:
+#    name: prometheus
+#    tasks_from: alert-rules-update
+#
 
-- name: copy module
-  ansible.builtin.copy:
-    src: expense.conf
-    dest: /etc/nginx/default.d/expense.conf
-
-- name: import common role
-  ansible.builtin.import_role:
-    name: common
-    tasks_from: prereq
-  vars:
-    app_dir: /usr/share/nginx/html
-    component: frontend
-    
-- name: restart nginx
-  ansible.builtin.systemd:
-    name: nginx
-    state: restarted
-    enabled: yes
-
-- name: import elk role -filebeat
-  ansible.builtin.import_role:
-    name: elk
-    tasks_from: filebeat
-
-- name: import node export
-  ansible.builtin.import_role:
-    name: prometheus
-    tasks_from: node-exporter
-
-
-- name: import grafana dashboard
-  ansible.builtin.import_role:
-    name: grafana
-
-- name: import prometheus role -alert-rules update
-  ansible.builtin.import_role:
-    name: prometheus
-    tasks_from: alert-rules-update
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- name : Install new relic agent
+  ansible.builtin.shell: curl -Ls https://download.newrelic.com/install/newrelic-cli/scripts/install.sh | bash && sudo NEW_RELIC_API_KEY=NRAK-HJTD7HUKABHWOP6IYWA3TGCQPDW NEW_RELIC_ACCOUNT_ID=4408033 /usr/local/bin/newrelic install -y -n infrastructure-agent-installer
 
 
